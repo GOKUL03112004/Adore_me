@@ -1,11 +1,12 @@
 import React from 'react';
+import Home from './pages/Home';
 
-function App() {
+const App = () => {
   return (
     <div>
-      <h1>Welcome to My E-commerce Site</h1>
+      <Home />
     </div>
   );
-}
+};
 
 export default App;

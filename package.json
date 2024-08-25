@@ -1,11 +1,31 @@
 {
-  "name": "c",
+  "name": "adore_me",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple e-commerce platform.",
   "main": "index.js",
   "scripts": {
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.6.0",
+    "sass": "^1.64.0",
+    "sass-loader": "^13.3.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.0"
+  }
 }
