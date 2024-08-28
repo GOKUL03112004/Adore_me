@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <div className="header-container">
           <div className="header-left">
-            <h1>SHOPPERS STOP</h1>
+            <h1>ADORE ME</h1>
             <input type="text" placeholder="What are you looking for?" />
           </div>
           <div className="header-right">
@@ -37,11 +37,6 @@ function App() {
         <section className="hero">
           <div className="hero-image">
             <img src="https://www.shoppersstop.com/on/demandware.static/-/Sites-shoppersstop-master-catalog/default/dw948b7a1c/images/banner-image.jpg" alt="Hero Image" />
-          </div>
-          <div className="hero-text">
-            <h2>USE CODE</h2>
-            <p>For First Time Users</p>
-            <p>10% off on ₹2,000 with Max ₹500 discount</p>
           </div>
         </section>
       </main>
