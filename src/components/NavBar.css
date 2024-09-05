@@ -1,0 +1,26 @@
+/* src/components/NavBar.css */
+.nav-bar {
+    background-color: #333;
+    padding: 10px 20px;
+  }
+  
+  .nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .nav-bar ul li {
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .nav-bar ul li:hover {
+    background-color: #555;
+    border-radius: 4px;
+  }
+  

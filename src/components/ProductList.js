@@ -1,6 +1,6 @@
 // src/components/ProductList.js
 import React, { useEffect, useState } from 'react';
-import { getProducts } from '../apiService';
+import { getProducts } from './apiService';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);

@@ -1,13 +1,16 @@
-// webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  mode: 'development', // Use 'development' mode for better debugging
+
+  entry: './src/index.js', // Set entry point to index.js
+
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
+
   module: {
     rules: [
       {
@@ -19,18 +22,31 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext][query]',
+        },
+      },
     ],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './public/index.html', // Keep the HTML template
     }),
   ],
+
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'), // Use 'static' instead of 'contentBase'
+      directory: path.join(__dirname, 'dist'),
     },
     compress: true,
     port: 9000,
+  },
+
+  resolve: {
+    extensions: ['.js'],
   },
 };
