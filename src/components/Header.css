@@ -52,3 +52,9 @@
 .user-actions i:hover {
   color: #007bff; /* Change icon color on hover */
 }
+button:disabled {
+  background-color: #ccc; /* Grey out the button */
+  cursor: not-allowed;    /* Change cursor to indicate it's disabled */
+  opacity: 0.6;           /* Make it slightly transparent */
+}
+

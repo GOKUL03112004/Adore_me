@@ -1,35 +1,18 @@
-// src/Home.js
 import React from 'react';
-import './Home.css';
+import Header from './Header'; // Import your Header component
+import Navbar from './Navbar'; // Import your Navbar component
+import HeroSection from './HeroSection'; // Import your HeroSection component
+import FeaturedProducts from './FeaturedProducts'; // Import your FeaturedProducts component
+import Footer from './Footer'; // Import your Footer component
 
 const Home = () => {
   return (
-    <div className="home">
-      <header className="home-header">
-        <h1>Welcome to Adore_me</h1>
-        <p>Your favorite online store for fashion and accessories!</p>
-      </header>
-      <main className="home-content">
-        <section className="home-featured">
-          <h2>Featured Products</h2>
-          <div className="product-list">
-            {/* Example Product Card */}
-            <div className="product-card">
-              <img src="path_to_image" alt="Product" />
-              <h3>Product Name</h3>
-              <p>$Price</p>
-            </div>
-            {/* Add more product cards as needed */}
-          </div>
-        </section>
-        <section className="home-about">
-          <h2>About Us</h2>
-          <p>Learn more about our story and mission.</p>
-        </section>
-      </main>
-      <footer className="home-footer">
-        <p>&copy; 2024 Adore_me. All rights reserved.</p>
-      </footer>
+    <div>
+      <Header />
+      <Navbar />
+      <HeroSection />
+      <FeaturedProducts />
+      <Footer />
     </div>
   );
 };

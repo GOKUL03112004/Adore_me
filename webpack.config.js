@@ -29,6 +29,13 @@ module.exports = {
           filename: 'fonts/[name][ext][query]',
         },
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext][query]',
+        },
+      },
     ],
   },
 
@@ -44,6 +51,7 @@ module.exports = {
     },
     compress: true,
     port: 9000,
+    historyApiFallback: true, // Enable client-side routing
   },
 
   resolve: {

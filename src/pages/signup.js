@@ -1,6 +1,7 @@
-// src/components/Signup.js
+// src/components/pages/Signup.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // useNavigate for navigation
 import './signup.css';
 
 const Signup = () => {
@@ -10,8 +11,35 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  const navigate = useNavigate(); // useNavigate hook for navigation
+
+  // Basic validation for form inputs
+  const validateForm = () => {
+    if (username.trim() === '' || email.trim() === '' || password.trim() === '') {
+      setError('All fields are required.');
+      return false;
+    }
+
+    // Simple email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Invalid email format.');
+      return false;
+    }
+
+    // Password validation (minimum 6 characters)
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) return; // If validation fails, stop submission
 
     try {
       const response = await axios.post('http://localhost:1337/api/auth/local/register', {
@@ -19,9 +47,22 @@ const Signup = () => {
         email,
         password,
       });
-      setSuccess('User registered successfully!');
+      
+      // Set success message and clear form
+      setSuccess('Account registered successfully!');
       setError('');
+      setUsername('');
+      setEmail('');
+      setPassword('');
+
+      // Display a pop-up alert for successful registration
+      alert('Registration successful! Redirecting to login page...');
+
+      // Log the registered user
       console.log('User registered:', response.data);
+
+      // Redirect to login page after successful registration
+      navigate('/login');
     } catch (error) {
       setError('Error registering user. Please try again.');
       setSuccess('');

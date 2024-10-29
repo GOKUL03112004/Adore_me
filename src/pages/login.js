@@ -1,26 +1,45 @@
-// src/components/Login.js
-
+// src/pages/Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import './login.css'; // Import the CSS file for styling
+import { useNavigate } from 'react-router-dom';
+import './login.css'; // Import your CSS
 
-const Login = () => {
+function Login({ setIsLoggedIn, setUserDetails }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Add login logic here (e.g., call to an API)
-    if (!email || !password) {
-      setError('Please fill in all fields.');
+    const response = await loginUser (email, password);
+    
+    if (response.success) {
+      setIsLoggedIn(true);
+      setUserDetails({ username: response.username, email: response.email });
+      localStorage.setItem('token', response.token); // Store JWT token in localStorage
+      navigate('/'); // Redirect to home page after login
     } else {
-      setError('');
-      // Handle login logic here
-      console.log('Logging in with', email, password);
-      // After successful login, redirect to the home page
-      navigate('/home'); // Change '/home' to your actual home route
+      setError('Login failed. Please try again.');
+    }
+  };
+
+  const loginUser  = async (email, password) => {
+    try {
+      const response = await fetch('http://localhost:1337/api/auth/local', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      return { success: true, username: data.user.username, email: data.user.email, token: data.jwt };
+    } catch (error) {
+      console.error('Error during login:', error);
+      return { success: false };
     }
   };
 
@@ -28,37 +47,36 @@ const Login = () => {
     <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>
-        {error && <p className="error">{error}</p>}
-        <form className="login-form" onSubmit={handleSubmit}>
+        {error && <p className="error-message">{error}</p>}
+        <form onSubmit={handleLogin} className="login-form">
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label>Email</label>
             <input
               type="email"
-              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
+            <label>Password</label>
             <input
               type="password"
-              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
               required
             />
           </div>
-          <button type="submit">Login</button>
-          <p>
-            New Customers?{' '}
-            <a href="#" onClick={() => navigate('/signup')}>Signup</a>
-          </p>
+          <button type="submit" className="login-btn">Login</button>
         </form>
+        <div className="signup-text">
+          New? <a href="/signup" className="signup-link">Signup</a>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;

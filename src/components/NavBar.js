@@ -1,13 +1,38 @@
 // src/components/NavBar.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Ensure useNavigate is imported
 import './NavBar.css';
 
 function NavBar() {
+  const navigate = useNavigate(); // Initialize navigate
+
+  const handleCategoryClick = (category) => {
+    // Navigate to the products page with the selected category as a query parameter
+    navigate(`/products?category=${category}`);
+  };
+
   return (
     <nav className="nav-bar">
       <ul>
-        <li>Men</li>
-        <li>Women</li>
+        <li className="dropdown">
+          Men
+          <div className="dropdown-content">
+            <a onClick={() => handleCategoryClick('Men\'s shirt')}>Shirts</a>
+            <a onClick={() => handleCategoryClick('Men\'s pant')}>Pants</a>
+            <a onClick={() => handleCategoryClick('Men\'s jackets')}>Jackets</a>
+            <a onClick={() => handleCategoryClick('Men\'s suits')}>Suits</a>
+          </div>
+        </li>
+        <li className="dropdown">
+          Women
+          <div className="dropdown-content">
+            <a onClick={() => handleCategoryClick('Dresses')}>Dresses</a>
+            <a onClick={() => handleCategoryClick('Skirts')}>Skirts</a>
+            <a onClick={() => handleCategoryClick('Blouses')}>Blouses</a>
+            <a onClick={() => handleCategoryClick('Outerwear')}>Outerwear</a>
+          </div>
+        </li>
+        {/* Add other categories here */}
         <li>Kids</li>
         <li>Beauty</li>
         <li>Watches</li>
